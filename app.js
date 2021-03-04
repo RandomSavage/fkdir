@@ -58,4 +58,57 @@
   // .then(data => console.log(data))
   // .catch(error => console.log('ERROR'))
 
+  // fetch using async and await to get a local img
+ 
+  catchPik()
+    .then(response => {
+      console.log('Success!');
+    })
+    .catch(error => {
+      console.log('error!');
+      console.error(error);
+    })
+ 
+  async function catchPik() {
+    const response = await fetch('draw.svg');
+    const blob = await response.blob();
+    document.getElementById('pik').src= URL.createObjectURL(blob)
+
+
+  }
+
+
+  //without async and await
+  // console.log('about to fetch a pik');
+  // fetch('pik.svg')
+  //   .then(response => {
+  //     console.log(response);
+  //     return response.blob();
+  //   })
+  //   .then(blob => {
+  //     document.getElementById('pik').src= URL.createObjectURL(blob);
+  //   })
+  //   .catch(error => {
+  //     console.log('error');
+  //     console.error(error);
+  //   })
+
+  let speak = document.querySelector('#speak');
+
+  fetchText()
+  .then(response => {
+    console.log('Success!');
+  })
+  .catch(error => {
+    console.log('error!');
+    console.error(error);
+  })
+
+  async function fetchText() {
+    let response = await fetch('voiceBox.txt');
+    let data = await response.text();
+    speak.innerHTML = data;
+    console.log(data);
+  }
+
 
